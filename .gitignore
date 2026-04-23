@@ -1,0 +1,25 @@
+# General
+.DS_Store
+Thumbs.db
+*~
+*.swp
+
+# IDEs
+.idea/
+.vscode/
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# =========================
+# ML models
+# =========================
+*.joblib
+*.pkl
+
+# =========================
+# datasets
+# =========================
+*.csv
