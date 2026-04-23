@@ -6,6 +6,7 @@ import type { AreaInsightsResponse } from '@/types';
 import { RentByBHKChart, DealDistributionPie } from '@/components/PriceChart';
 import SearchForm from '@/components/SearchForm';
 import { GlowingCard } from '@/components/GlowingCard';
+import { GlowingButton } from '@/components/GlowingButton';
 
 const CITIES = ['Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Pune', 'Chennai', 'Kolkata', 'Ahmedabad'];
 
@@ -60,15 +61,17 @@ export default function InsightsPage() {
       {/* City selector */}
       <div className="flex flex-wrap gap-2 mb-8">
         {CITIES.map(c => (
-          <button key={c} id={`insight-city-${c.toLowerCase()}`}
+          <GlowingButton
+            key={c}
+            id={`insight-city-${c.toLowerCase()}`}
             onClick={() => setCity(c)}
-            className={`px-4 py-2 rounded-xl text-sm font-medium transition-all duration-200
-              ${city === c
-                ? 'bg-gradient-to-r from-violet-600 to-cyan-600 text-white shadow-lg shadow-violet-500/20'
-                : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10'
-              }`}>
+            isActive={city === c}
+            roundedClass="rounded-xl"
+            paddingClass="px-4 py-2 text-sm"
+            activeClassName="bg-gradient-to-r from-violet-600 to-cyan-600 text-white shadow-lg shadow-violet-500/20"
+          >
             {c}
-          </button>
+          </GlowingButton>
         ))}
       </div>
 

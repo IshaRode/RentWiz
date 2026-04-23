@@ -8,6 +8,7 @@ import { ScatterPlot } from '@/components/PriceChart';
 import { getBestDeals, formatRentFull } from '@/lib/api';
 import type { DealResult, SearchFilters, DealLabel } from '@/types';
 import { GlowingCard } from '@/components/GlowingCard';
+import { GlowingButton } from '@/components/GlowingButton';
 
 const CITIES = ['', 'Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Pune', 'Chennai', 'Kolkata', 'Ahmedabad'];
 
@@ -125,16 +126,14 @@ function DealsContent() {
       {/* Quick city filter pills */}
       <div className="flex flex-wrap gap-2 mb-6">
         {CITIES.map(c => (
-          <button key={c || 'all'}
+          <GlowingButton
+            key={c || 'all'}
             id={`city-pill-${c || 'all'}`}
             onClick={() => setFilters(prev => ({ ...prev, city: c }))}
-            className={`px-3 py-1.5 rounded-full text-xs font-medium transition-all duration-200
-              ${filters.city === c
-                ? 'bg-violet-600 text-white shadow-lg shadow-violet-500/20'
-                : 'bg-white/5 text-gray-400 hover:bg-white/10 hover:text-white border border-white/10'
-              }`}>
+            isActive={filters.city === c}
+          >
             {c || 'All Cities'}
-          </button>
+          </GlowingButton>
         ))}
       </div>
 
