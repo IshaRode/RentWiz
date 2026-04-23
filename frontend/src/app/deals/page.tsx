@@ -1,7 +1,7 @@
 'use client';
 import { useState, useEffect, useCallback, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
-import { SlidersHorizontal, TrendingDown, Loader2, AlertCircle, LayoutGrid, List, ChevronDown } from 'lucide-react';
+import { SlidersHorizontal, TrendingDown, Loader2, AlertCircle, ChevronDown } from 'lucide-react';
 import DealCard from '@/components/DealCard';
 import SearchForm from '@/components/SearchForm';
 import { ScatterPlot } from '@/components/PriceChart';
@@ -17,7 +17,6 @@ function DealsContent() {
   const [deals, setDeals] = useState<DealResult[]>([]);
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [viewMode, setViewMode] = useState<'grid' | 'list'>('grid');
   const [showFilters, setShowFilters] = useState(false);
   const [filters, setFilters] = useState<SearchFilters>({
     city: params.get('city') || '',
@@ -101,19 +100,6 @@ function DealsContent() {
           Filters
           <ChevronDown size={14} className={`transition-transform ${showFilters ? 'rotate-180' : ''}`} />
         </button>
-
-        <div className="flex items-center gap-2">
-          <button id="grid-view-btn"
-            onClick={() => setViewMode('grid')}
-            className={`p-2 rounded-lg transition-colors ${viewMode === 'grid' ? 'bg-white/10 text-white' : 'text-gray-500 hover:text-white'}`}>
-            <LayoutGrid size={16} />
-          </button>
-          <button id="list-view-btn"
-            onClick={() => setViewMode('list')}
-            className={`p-2 rounded-lg transition-colors ${viewMode === 'list' ? 'bg-white/10 text-white' : 'text-gray-500 hover:text-white'}`}>
-            <List size={16} />
-          </button>
-        </div>
       </div>
 
       {/* Search form */}
@@ -170,11 +156,7 @@ function DealsContent() {
 
       {!loading && deals.length > 0 && (
         <>
-          <div className={`grid gap-5 mb-12 ${
-            viewMode === 'grid'
-              ? 'grid-cols-1 sm:grid-cols-2 lg:grid-cols-3'
-              : 'grid-cols-1 max-w-2xl'
-          }`}>
+          <div className="grid gap-5 mb-12 grid-cols-1 sm:grid-cols-2 lg:grid-cols-3">
             {deals.map((deal, i) => (
               <DealCard key={`${deal.listing_url}-${i}`} deal={deal} rank={i + 1} />
             ))}
