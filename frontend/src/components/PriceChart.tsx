@@ -106,7 +106,7 @@ export function DealDistributionPie({
         <Pie
           data={pieData} cx="50%" cy="45%" outerRadius={90} innerRadius={50}
           dataKey="value" paddingAngle={4}
-          label={({ name, percent }) => `${name} ${(percent * 100).toFixed(0)}%`}
+          label={({ name, percent = 0 }: any) => `${name} ${(percent * 100).toFixed(0)}%`}
           labelLine={{ stroke: '#4b5563', strokeWidth: 1 }}
         >
           {pieData.map((entry, i) => (
