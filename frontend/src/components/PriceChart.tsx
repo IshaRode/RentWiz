@@ -79,7 +79,7 @@ export function RentByBHKChart({ data }: { data: { bhk: number; avg_rent: number
           tickFormatter={v => `₹${(v/1000).toFixed(0)}k`} width={60} />
         <Tooltip
           contentStyle={{ background: '#111827', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.75rem', color: '#fff' }}
-          formatter={(v: number) => [formatRentFull(v), 'Avg Rent']}
+          formatter={(v: any) => [formatRentFull(Number(v)), 'Avg Rent']}
         />
         <Bar dataKey="avg_rent" radius={[6, 6, 0, 0]}>
           {data.map((_, i) => (
