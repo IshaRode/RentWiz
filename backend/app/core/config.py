@@ -4,6 +4,7 @@ Reads environment variables via Pydantic BaseSettings.
 """
 from pydantic_settings import BaseSettings, SettingsConfigDict
 from functools import lru_cache
+import os
 
 
 class Settings(BaseSettings):
@@ -31,11 +32,17 @@ class Settings(BaseSettings):
     gemini_api_key: str = ""
     use_ai_explanations: bool = True
 
-    # CORS
-    allowed_origins: list[str] = [
-        "http://localhost:3000",
-        "http://localhost:3001",
-    ]
+    # CORS — can be overridden via ALLOWED_ORIGINS env var (comma-separated)
+    @property
+    def allowed_origins(self) -> list[str]:
+        env_origins = os.getenv("ALLOWED_ORIGINS", "")
+        base = [
+            "http://localhost:3000",
+            "http://localhost:3001",
+        ]
+        if env_origins:
+            base += [o.strip() for o in env_origins.split(",") if o.strip()]
+        return base
 
     # Deal scoring thresholds
     good_deal_threshold: int = 2000      # deal_score > 2000 → good deal

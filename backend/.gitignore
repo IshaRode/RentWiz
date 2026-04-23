@@ -128,13 +128,5 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# =========================
-# ML models
-# =========================
-*.joblib
-*.pkl
-
-# =========================
-# datasets
-# =========================
-*.csv
+# ML models and datasets are committed intentionally
+# Files are small (~1MB) and required for Render deployment
