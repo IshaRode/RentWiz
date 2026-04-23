@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { useRouter } from 'next/navigation';
 import { Search, MapPin, Home, Maximize2, IndianRupee, Zap } from 'lucide-react';
 import type { SearchFilters } from '@/types';
+import { GlowingCard } from '@/components/GlowingCard';
 
 const CITIES = ['Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Pune', 'Chennai', 'Kolkata', 'Ahmedabad'];
 const BHK_OPTIONS = [1, 2, 3, 4];
@@ -63,9 +64,9 @@ export default function SearchForm({ onSearch, compact = false }: SearchFormProp
   }
 
   return (
-    <form onSubmit={handleSubmit}
-      className="glass-card p-6 md:p-8 space-y-6 glow-violet">
-      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+    <GlowingCard className="p-6 md:p-8 glow-violet">
+      <form onSubmit={handleSubmit} className="space-y-6">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
         {/* City */}
         <div className="lg:col-span-1">
           <label htmlFor="city-select" className="block text-sm text-gray-400 mb-2 font-medium flex items-center gap-1.5">
@@ -124,7 +125,8 @@ export default function SearchForm({ onSearch, compact = false }: SearchFormProp
           onClick={() => setFilters({ city: 'Mumbai', bhk: 2, maxBudget: null, label: null })}>
           Reset Filters
         </button>
-      </div>
-    </form>
+        </div>
+      </form>
+    </GlowingCard>
   );
 }

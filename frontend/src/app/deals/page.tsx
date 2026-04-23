@@ -7,6 +7,7 @@ import SearchForm from '@/components/SearchForm';
 import { ScatterPlot } from '@/components/PriceChart';
 import { getBestDeals, formatRentFull } from '@/lib/api';
 import type { DealResult, SearchFilters, DealLabel } from '@/types';
+import { GlowingCard } from '@/components/GlowingCard';
 
 const CITIES = ['', 'Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Pune', 'Chennai', 'Kolkata', 'Ahmedabad'];
 
@@ -73,20 +74,20 @@ function DealsContent() {
       {/* Stats strip */}
       {!loading && deals.length > 0 && (
         <div className="grid grid-cols-3 gap-4 mb-8">
-          <div className="glass-card p-4 text-center">
+          <GlowingCard className="p-4 text-center">
             <div className="text-2xl font-bold text-white">{stats.total}</div>
             <div className="text-xs text-gray-500 mt-1">Listings Found</div>
-          </div>
-          <div className="glass-card p-4 text-center">
+          </GlowingCard>
+          <GlowingCard className="p-4 text-center">
             <div className="text-2xl font-bold text-emerald-400">{stats.goodDeals}</div>
             <div className="text-xs text-gray-500 mt-1">Great Deals</div>
-          </div>
-          <div className="glass-card p-4 text-center">
+          </GlowingCard>
+          <GlowingCard className="p-4 text-center">
             <div className="text-2xl font-bold text-cyan-400">
               {stats.avgSavings > 0 ? formatRentFull(Math.round(stats.avgSavings)) : '—'}
             </div>
             <div className="text-xs text-gray-500 mt-1">Avg Monthly Savings</div>
-          </div>
+          </GlowingCard>
         </div>
       )}
 
@@ -181,7 +182,7 @@ function DealsContent() {
           </div>
 
           {/* Scatter Plot */}
-          <div className="glass-card p-6">
+          <GlowingCard className="p-6">
             <h2 className="text-lg font-bold text-white mb-1">
               Rent vs Area — Deal Map
             </h2>
@@ -191,7 +192,7 @@ function DealsContent() {
               <span className="text-red-400">●</span> Overpriced
             </p>
             <ScatterPlot deals={deals} />
-          </div>
+          </GlowingCard>
         </>
       )}
     </div>

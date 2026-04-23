@@ -5,16 +5,17 @@ import { getAreaInsights, formatRentFull } from '@/lib/api';
 import type { AreaInsightsResponse } from '@/types';
 import { RentByBHKChart, DealDistributionPie } from '@/components/PriceChart';
 import SearchForm from '@/components/SearchForm';
+import { GlowingCard } from '@/components/GlowingCard';
 
 const CITIES = ['Mumbai', 'Delhi', 'Bangalore', 'Hyderabad', 'Pune', 'Chennai', 'Kolkata', 'Ahmedabad'];
 
 function StatCard({ label, value, sub, color = 'text-white' }: { label: string; value: string; sub?: string; color?: string }) {
   return (
-    <div className="glass-card p-5">
+    <GlowingCard className="p-5">
       <p className="text-xs text-gray-500 mb-1.5">{label}</p>
       <p className={`text-2xl font-bold ${color}`}>{value}</p>
       {sub && <p className="text-xs text-gray-600 mt-1">{sub}</p>}
-    </div>
+    </GlowingCard>
   );
 }
 
@@ -115,22 +116,22 @@ export default function InsightsPage() {
           {/* Charts row */}
           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6 mb-8">
             {/* Avg Rent by BHK */}
-            <div className="glass-card p-6">
+            <GlowingCard className="p-6">
               <h3 className="text-base font-bold text-white mb-1">Average Rent by BHK</h3>
               <p className="text-xs text-gray-500 mb-5">How bedroom count drives rent in {city}</p>
               <RentByBHKChart data={data.rent_by_bhk} />
-            </div>
+            </GlowingCard>
 
             {/* Deal distribution pie */}
-            <div className="glass-card p-6">
+            <GlowingCard className="p-6">
               <h3 className="text-base font-bold text-white mb-1">Deal Distribution</h3>
               <p className="text-xs text-gray-500 mb-5">What proportion of listings are good deals</p>
               <DealDistributionPie distribution={data.deal_distribution} />
-            </div>
+            </GlowingCard>
           </div>
 
           {/* Top localities */}
-          <div className="glass-card p-6 mb-8">
+          <GlowingCard className="p-6 mb-8">
             <h3 className="text-base font-bold text-white mb-5">Top Localities by Average Rent</h3>
             <div className="space-y-3">
               {data.top_localities.map((loc, i) => {
@@ -155,25 +156,25 @@ export default function InsightsPage() {
                 );
               })}
             </div>
-          </div>
+          </GlowingCard>
 
           {/* Deal summary cards */}
           <div className="grid grid-cols-3 gap-4">
-            <div className="glass-card p-5 border-emerald-500/20">
+            <GlowingCard className="p-5 border-emerald-500/20">
               <div className="text-3xl font-black text-emerald-400">{data.deal_distribution.good_deal}</div>
               <div className="text-sm text-white font-medium mt-1">Great Deals</div>
               <div className="text-xs text-gray-500 mt-1">Priced below market</div>
-            </div>
-            <div className="glass-card p-5 border-yellow-500/20">
+            </GlowingCard>
+            <GlowingCard className="p-5 border-yellow-500/20">
               <div className="text-3xl font-black text-yellow-400">{data.deal_distribution.fair}</div>
               <div className="text-sm text-white font-medium mt-1">Fair Price</div>
               <div className="text-xs text-gray-500 mt-1">Within market range</div>
-            </div>
-            <div className="glass-card p-5 border-red-500/20">
+            </GlowingCard>
+            <GlowingCard className="p-5 border-red-500/20">
               <div className="text-3xl font-black text-red-400">{data.deal_distribution.overpriced}</div>
               <div className="text-sm text-white font-medium mt-1">Overpriced</div>
               <div className="text-xs text-gray-500 mt-1">Above market rate</div>
-            </div>
+            </GlowingCard>
           </div>
         </>
       )}
