@@ -38,12 +38,7 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
               <Link href="/insights" className="nav-link">Market Insights</Link>
             </div>
 
-            <div className="flex items-center gap-3">
-              <span className="hidden sm:flex items-center gap-1.5 text-xs text-emerald-400 bg-emerald-400/10 px-3 py-1.5 rounded-full border border-emerald-400/20">
-                <span className="w-1.5 h-1.5 rounded-full bg-emerald-400 animate-pulse" />
-                Live Data
-              </span>
-            </div>
+            <div className="w-[100px] hidden sm:block"></div>
           </div>
         </nav>
 
