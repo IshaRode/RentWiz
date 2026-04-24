@@ -361,6 +361,3 @@ pytest tests/ -v
 
 ---
 
-## 📄 License
-
-MIT License — feel free to use, modify, and distribute.
