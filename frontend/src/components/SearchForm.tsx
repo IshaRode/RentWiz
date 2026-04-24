@@ -45,15 +45,26 @@ export default function SearchForm({ onSearch, compact = false }: SearchFormProp
           <label className="block text-xs text-gray-400 mb-1.5 font-medium">City</label>
           <select id="city-select-compact" className="select-field text-sm py-2.5"
             value={filters.city} onChange={e => set('city', e.target.value)}>
-            {CITIES.map(c => <option key={c}>{c}</option>)}
+            <option value="">All Cities</option>
+            {CITIES.map(c => <option key={c} value={c}>{c}</option>)}
           </select>
         </div>
-        <div className="w-28">
+        <div className="w-24">
           <label className="block text-xs text-gray-400 mb-1.5 font-medium">BHK</label>
           <select id="bhk-select-compact" className="select-field text-sm py-2.5"
             value={filters.bhk ?? ''} onChange={e => set('bhk', e.target.value ? Number(e.target.value) : null)}>
             <option value="">Any</option>
             {BHK_OPTIONS.map(b => <option key={b} value={b}>{b}BHK</option>)}
+          </select>
+        </div>
+        <div className="flex-1 min-w-[130px]">
+          <label className="block text-xs text-gray-400 mb-1.5 font-medium">Deal Type</label>
+          <select id="deal-filter-compact" className="select-field text-sm py-2.5"
+            value={filters.label ?? ''} onChange={e => set('label', e.target.value || null)}>
+            <option value="">All Deals</option>
+            <option value="good_deal">🟢 Good</option>
+            <option value="fair">🟡 Fair</option>
+            <option value="overpriced">🔴 Overpriced</option>
           </select>
         </div>
         <button id="search-btn-compact" type="submit" className="btn-primary py-2.5 px-5 text-sm">
@@ -74,7 +85,8 @@ export default function SearchForm({ onSearch, compact = false }: SearchFormProp
           </label>
           <select id="city-select" className="select-field"
             value={filters.city} onChange={e => set('city', e.target.value)}>
-            {CITIES.map(c => <option key={c}>{c}</option>)}
+            <option value="">All Cities</option>
+            {CITIES.map(c => <option key={c} value={c}>{c}</option>)}
           </select>
         </div>
 

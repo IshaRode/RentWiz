@@ -3,6 +3,7 @@ import { useState } from 'react';
 import { TrendingDown, Sparkles, BarChart3, Search, ArrowRight, Star, Shield, Zap } from 'lucide-react';
 import Link from 'next/link';
 import SearchForm from '@/components/SearchForm';
+import { GlowingEffect } from '@/components/ui/glowing-effect';
 
 const STATS = [
   { label: 'Listings Analyzed', value: '4,700+', icon: BarChart3, color: 'text-violet-400' },
@@ -65,9 +66,10 @@ export default function HomePage() {
       {/* ── Hero ──────────────────────────────────────────────── */}
       <section className="relative overflow-hidden pt-20 pb-32 px-6">
         {/* Background glows */}
-        <div className="absolute top-0 left-1/4 w-96 h-96 bg-violet-600/15 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute top-20 right-1/4 w-80 h-80 bg-cyan-600/10 rounded-full blur-3xl pointer-events-none" />
-        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-violet-500/20 to-transparent" />
+        <div className="absolute top-0 left-1/4 w-[600px] h-[600px] bg-violet-600/20 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute top-20 right-1/4 w-[500px] h-[500px] bg-fuchsia-600/15 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-20 left-1/3 w-[400px] h-[400px] bg-cyan-600/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute bottom-0 left-1/2 -translate-x-1/2 w-full h-px bg-gradient-to-r from-transparent via-violet-500/30 to-transparent" />
 
         <div className="max-w-5xl mx-auto text-center relative">
           {/* Badge */}
@@ -102,10 +104,13 @@ export default function HomePage() {
           {/* Stats */}
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 animate-fade-in-up delay-300">
             {STATS.map((stat) => (
-              <div key={stat.label} className="glass-card p-4 text-center">
-                <stat.icon size={20} className={`${stat.color} mx-auto mb-2`} />
-                <div className="text-2xl font-bold text-white">{stat.value}</div>
-                <div className="text-xs text-gray-500 mt-1">{stat.label}</div>
+              <div key={stat.label} className="relative rounded-2xl border border-white/5 p-[1px] group">
+                <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
+                <div className="glass-card relative h-full rounded-xl p-4 text-center border-none">
+                  <stat.icon size={20} className={`${stat.color} mx-auto mb-2`} />
+                  <div className="text-2xl font-bold text-white">{stat.value}</div>
+                  <div className="text-xs text-gray-500 mt-1">{stat.label}</div>
+                </div>
               </div>
             ))}
           </div>
@@ -134,13 +139,15 @@ export default function HomePage() {
 
         <div className="grid grid-cols-1 md:grid-cols-2 gap-5">
           {FEATURES.map((f) => (
-            <div key={f.title}
-              className={`relative rounded-2xl bg-gradient-to-br ${f.color} border ${f.border} p-6 hover:scale-[1.01] transition-transform duration-200`}>
-              <div className={`w-10 h-10 rounded-xl ${f.iconBg} flex items-center justify-center mb-4`}>
-                <f.icon size={20} className={f.iconColor} />
+            <div key={f.title} className="relative rounded-2xl border border-white/5 p-[1px] group hover:scale-[1.01] transition-transform duration-200">
+              <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
+              <div className={`relative h-full rounded-xl bg-gradient-to-br ${f.color} border-none p-6`}>
+                <div className={`w-10 h-10 rounded-xl ${f.iconBg} flex items-center justify-center mb-4`}>
+                  <f.icon size={20} className={f.iconColor} />
+                </div>
+                <h3 className="text-lg font-bold text-white mb-2">{f.title}</h3>
+                <p className="text-sm text-gray-400 leading-relaxed">{f.description}</p>
               </div>
-              <h3 className="text-lg font-bold text-white mb-2">{f.title}</h3>
-              <p className="text-sm text-gray-400 leading-relaxed">{f.description}</p>
             </div>
           ))}
         </div>
@@ -154,14 +161,17 @@ export default function HomePage() {
         </div>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-5">
           {HOW_IT_WORKS.map((step, i) => (
-            <div key={step.step} className="relative">
+            <div key={step.step} className="relative h-full">
               {i < HOW_IT_WORKS.length - 1 && (
                 <div className="hidden lg:block absolute top-6 left-[calc(100%+0px)] w-full h-px bg-gradient-to-r from-violet-500/30 to-transparent z-10" />
               )}
-              <div className="glass-card p-5 h-full hover:border-violet-500/30 transition-colors duration-200">
-                <div className="text-3xl font-black gradient-text mb-3">{step.step}</div>
-                <h3 className="font-bold text-white text-sm mb-2">{step.title}</h3>
-                <p className="text-xs text-gray-400 leading-relaxed">{step.desc}</p>
+              <div className="relative rounded-2xl border border-white/5 p-[1px] h-full group">
+                <GlowingEffect spread={40} glow={true} disabled={false} proximity={64} inactiveZone={0.01} />
+                <div className="glass-card relative rounded-xl p-5 h-full border-none">
+                  <div className="text-3xl font-black gradient-text mb-3">{step.step}</div>
+                  <h3 className="font-bold text-white text-sm mb-2">{step.title}</h3>
+                  <p className="text-xs text-gray-400 leading-relaxed">{step.desc}</p>
+                </div>
               </div>
             </div>
           ))}
@@ -170,10 +180,10 @@ export default function HomePage() {
 
       {/* ── CTA Banner ───────────────────────────────────────── */}
       <section className="max-w-4xl mx-auto px-6 mb-20">
-        <div className="relative rounded-3xl overflow-hidden bg-gradient-to-r from-violet-900/50 to-cyan-900/50 border border-violet-500/20 p-10 text-center">
-          <div className="absolute inset-0 bg-gradient-to-br from-violet-600/10 to-cyan-600/10" />
+        <div className="relative rounded-3xl overflow-hidden border border-violet-500/20 p-10 text-center"
+          style={{ background: 'linear-gradient(135deg, rgba(90,30,180,0.35) 0%, rgba(180,30,180,0.25) 50%, rgba(6,100,150,0.30) 100%)' }}>
+          <div className="absolute inset-0" style={{ background: 'radial-gradient(ellipse at 30% 50%, rgba(139,92,246,0.15), transparent 60%), radial-gradient(ellipse at 70% 50%, rgba(6,182,212,0.12), transparent 60%)' }} />
           <div className="relative">
-            <Star size={32} className="text-yellow-400 mx-auto mb-4 animate-float" />
             <h2 className="text-3xl font-black text-white mb-3">
               Ready to find your perfect deal?
             </h2>

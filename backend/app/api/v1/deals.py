@@ -146,6 +146,17 @@ async def best_deals(
                 listings = []
                 for row in rows_to_use:
                     row["deal_label_display"] = deal_label_display(row.get("deal_label", "fair"))
+                    if not row.get("ai_explanation"):
+                        row["ai_explanation"] = generate_explanation(
+                            city=row.get("city", "Unknown"),
+                            bhk=row.get("bhk", 1),
+                            area_sqft=row.get("area_sqft", 0),
+                            actual_rent=row.get("actual_rent", 0),
+                            predicted_rent=row.get("predicted_rent", 0),
+                            deal_score=row.get("deal_score", 0),
+                            deal_label=row.get("deal_label", "fair"),
+                            location=row.get("location", "Unknown City Center"),
+                        )
                     listings.append(DealResult(**row))
 
                 return BestDealsResponse(

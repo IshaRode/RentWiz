@@ -4,8 +4,10 @@ import './globals.css';
 import Link from 'next/link';
 import { cn } from "@/lib/utils";
 import Logo from '@/components/Logo';
+import LiquidEtherWrapper from '@/components/LiquidEtherWrapper';
+import Navbar from '@/components/Navbar';
 
-const geist = Geist({subsets:['latin'],variable:'--font-sans'});
+const geist = Geist({ subsets: ['latin'], variable: '--font-sans' });
 
 const inter = Inter({ subsets: ['latin'], variable: '--font-inter' });
 
@@ -24,40 +26,31 @@ export const metadata: Metadata = {
 export default function RootLayout({ children }: { children: React.ReactNode }) {
   return (
     <html lang="en" className={cn("font-sans", geist.variable)}>
-      <body className="min-h-screen bg-[#0a0f1e] text-white antialiased">
-        {/* Navigation */}
-        <nav className="fixed top-0 left-0 right-0 z-50 bg-[#0a0f1e]/80 backdrop-blur-xl border-b border-white/5">
-          <div className="max-w-7xl mx-auto px-6 h-16 flex items-center justify-between">
-            <Link href="/" className="flex items-center group">
-              <Logo />
-            </Link>
+      <body className="min-h-screen text-white antialiased">
+        {/* LiquidEther Background */}
+        <LiquidEtherWrapper />
 
-            <div className="hidden md:flex items-center gap-1">
-              <Link href="/" className="nav-link">Home</Link>
-              <Link href="/deals" className="nav-link">Best Deals</Link>
-              <Link href="/insights" className="nav-link">Market Insights</Link>
+        <div className="relative z-10 flex flex-col min-h-screen">
+          {/* Navigation */}
+          <Navbar />
+
+          {/* Main */}
+          <main className="pt-16 flex-1">{children}</main>
+
+          {/* Footer */}
+          <footer className="border-t border-white/5 py-10 mt-20">
+            <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
+              <div className="flex items-center gap-2 text-gray-500 text-sm">
+                <span className="text-lg font-bold bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">RentWiz</span>
+                <span>·</span>
+                <span>AI-powered rental deal finder</span>
+              </div>
+              <p className="text-xs text-gray-600">
+                Predictions are for informational purposes only. Always verify with listings directly.
+              </p>
             </div>
-
-            <div className="w-[100px] hidden sm:block"></div>
-          </div>
-        </nav>
-
-        {/* Main */}
-        <main className="pt-16">{children}</main>
-
-        {/* Footer */}
-        <footer className="border-t border-white/5 py-10 mt-20">
-          <div className="max-w-7xl mx-auto px-6 flex flex-col md:flex-row items-center justify-between gap-4">
-            <div className="flex items-center gap-2 text-gray-500 text-sm">
-              <span className="text-lg font-bold bg-gradient-to-r from-violet-400 to-cyan-400 bg-clip-text text-transparent">RentWiz</span>
-              <span>·</span>
-              <span>AI-powered rental deal finder</span>
-            </div>
-            <p className="text-xs text-gray-600">
-              Predictions are for informational purposes only. Always verify with listings directly.
-            </p>
-          </div>
-        </footer>
+          </footer>
+        </div>
       </body>
     </html>
   );

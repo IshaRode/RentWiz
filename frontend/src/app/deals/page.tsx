@@ -52,8 +52,6 @@ function DealsContent() {
   const stats = {
     total: deals.length,
     goodDeals: deals.filter(d => d.deal_label === 'good_deal').length,
-    avgSavings: deals.filter(d => d.deal_label === 'good_deal').reduce((s, d) => s + d.deal_score, 0)
-      / Math.max(1, deals.filter(d => d.deal_label === 'good_deal').length),
   };
 
   return (
@@ -73,7 +71,7 @@ function DealsContent() {
 
       {/* Stats strip */}
       {!loading && deals.length > 0 && (
-        <div className="grid grid-cols-3 gap-4 mb-8">
+        <div className="grid grid-cols-2 gap-4 mb-8">
           <GlowingCard className="p-4 text-center">
             <div className="text-2xl font-bold text-white">{stats.total}</div>
             <div className="text-xs text-gray-500 mt-1">Listings Found</div>
@@ -81,12 +79,6 @@ function DealsContent() {
           <GlowingCard className="p-4 text-center">
             <div className="text-2xl font-bold text-emerald-400">{stats.goodDeals}</div>
             <div className="text-xs text-gray-500 mt-1">Great Deals</div>
-          </GlowingCard>
-          <GlowingCard className="p-4 text-center">
-            <div className="text-2xl font-bold text-cyan-400">
-              {stats.avgSavings > 0 ? formatRentFull(Math.round(stats.avgSavings)) : '—'}
-            </div>
-            <div className="text-xs text-gray-500 mt-1">Avg Monthly Savings</div>
           </GlowingCard>
         </div>
       )}

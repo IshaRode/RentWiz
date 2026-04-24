@@ -78,12 +78,15 @@ export function RentByBHKChart({ data }: { data: { bhk: number; avg_rent: number
         <YAxis tick={{ fill: '#6b7280', fontSize: 11 }}
           tickFormatter={v => `₹${(v/1000).toFixed(0)}k`} width={60} />
         <Tooltip
+          cursor={{ fill: 'transparent' }}
           contentStyle={{ background: '#111827', border: '1px solid rgba(255,255,255,0.1)', borderRadius: '0.75rem', color: '#fff' }}
+          itemStyle={{ color: '#fff' }}
+          labelStyle={{ color: '#fff' }}
           formatter={(v: any) => [formatRentFull(Number(v)), 'Avg Rent']}
         />
-        <Bar dataKey="avg_rent" radius={[6, 6, 0, 0]}>
+        <Bar dataKey="avg_rent" radius={[6, 6, 0, 0]} activeBar={false} style={{ outline: 'none' }}>
           {data.map((_, i) => (
-            <Cell key={i} fill={`hsl(${250 + i * 30}, 70%, 65%)`} />
+            <Cell key={i} fill={`hsl(${250 + i * 30}, 70%, 65%)`} style={{ outline: 'none' }} />
           ))}
         </Bar>
       </BarChart>

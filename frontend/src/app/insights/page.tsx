@@ -134,7 +134,7 @@ export default function InsightsPage() {
           </div>
 
           {/* Top localities */}
-          <GlowingCard className="p-6 mb-8">
+          <GlowingCard className="p-6" wrapperClassName="mb-8">
             <h3 className="text-base font-bold text-white mb-5">Top Localities by Average Rent</h3>
             <div className="space-y-3">
               {data.top_localities.map((loc, i) => {
